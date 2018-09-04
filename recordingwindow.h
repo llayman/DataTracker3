@@ -30,6 +30,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QLineEdit>
+#include <QtCharts>
 
 #include "keyset.h"
 #include "sessionevent.h"
@@ -87,6 +88,13 @@ private:
     QList<bool> ScheduleFlags;
     QList<qint64> ScheduleDurationSums;
     QList<QDateTime> ScheduleDurationFlaggedTimes;
+
+    QChart * chart;
+    QChartView * chartView;
+    QValueAxis * axisX,
+                * axisY;
+    QLineSeries * series;
+
 
     Schedule CurrentSchedule;
 

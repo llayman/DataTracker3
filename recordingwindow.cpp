@@ -42,6 +42,58 @@ RecordingWindow::RecordingWindow(QWidget *parent) : QDialog(parent), ui(new Ui::
 
     setWindowFlags(windowFlags);
 
+    chart = new QChart();
+    chart->layout()->setContentsMargins(0, 0, 0, 0);
+    chart->setBackgroundRoundness(0);
+    chart->setTitle("");
+    chart->setTitleFont(QFont("Serif", 10, -1, false));
+    chart->setTitleBrush(Qt::black);
+
+    axisX = new QValueAxis;
+    axisX->applyNiceNumbers();
+    //axisX->setGridLineColor(Qt::transparent);
+    axisX->setTitleText(tr("Seconds"));
+    axisX->setTitleFont(QFont("Serif", 10, -1, false));
+    axisX->setTitleBrush(Qt::black);
+    axisX->setMin(0);
+    axisX->setLabelsFont(QFont("Serif", 10, -1, false));
+    axisX->setLabelFormat(QString("%.1f"));
+    axisX->setLabelsBrush(Qt::black);
+    axisX->setLabelsColor(Qt::black);
+    axisX->setLinePenColor(Qt::black);
+    axisX->setLinePen(QPen(Qt::black));
+
+    axisY = new QValueAxis;
+    axisY->applyNiceNumbers();
+    //axisY->setGridLineColor(Qt::transparent);
+    axisY->setTitleText(tr("Behavior Count"));
+    axisY->setTitleFont(QFont("Serif", 10, -1, false));
+    axisY->setTitleBrush(Qt::black);
+    axisY->setLabelsFont(QFont("Serif", 10, -1, false));
+    axisY->setLabelsBrush(Qt::black);
+    axisY->setLabelsColor(Qt::black);
+    axisY->setMin(0);
+    axisY->setMax(100);
+    axisY->setLinePenColor(Qt::black);
+    axisY->setLinePen(QPen(Qt::black));
+
+    series = new QLineSeries();
+    series->append(0, 6);
+        series->append(2, 4);
+        series->append(3, 8);
+        series->append(7, 4);
+        series->append(10, 5);
+        *series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
+    chart->addSeries(series);
+
+
+    chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    ui->chartLayout->addWidget(chartView);
+
+    axisY->setMin(0);
+
     Started = false;
 }
 

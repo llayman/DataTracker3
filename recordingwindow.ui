@@ -542,6 +542,9 @@
      </item>
     </layout>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="chartLayout"/>
+   </item>
   </layout>
  </widget>
  <resources/>
