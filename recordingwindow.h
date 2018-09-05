@@ -24,6 +24,7 @@
 #ifndef RECORDINGWINDOW_H
 #define RECORDINGWINDOW_H
 
+#include <QtCore>
 #include <QDialog>
 #include <QElapsedTimer>
 #include <QTime>
@@ -94,6 +95,8 @@ private:
     QValueAxis * axisX,
                 * axisY;
     QLineSeries * series;
+    QVector<QPointF> m_buffer;
+
 
 
     Schedule CurrentSchedule;

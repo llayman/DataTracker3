@@ -78,12 +78,16 @@ RecordingWindow::RecordingWindow(QWidget *parent) : QDialog(parent), ui(new Ui::
     axisY->setLinePen(QPen(Qt::black));
 
     series = new QLineSeries();
-    series->append(0, 6);
-        series->append(2, 4);
-        series->append(3, 8);
-        series->append(7, 4);
-        series->append(10, 5);
-        *series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
+
+    m_buffer.reserve(100);
+    m_buffer.append(QPointF(11, 1));
+    m_buffer.append(QPointF(13, 3));
+    m_buffer.append(QPointF(17, 6));
+    m_buffer.append(QPointF(18, 3));
+    m_buffer.append(QPointF(20, 2));
+
+    //*series << QPointF(11, 1) << QPointF(13, 3)  << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
+    series->replace(m_buffer);
     chart->addSeries(series);
 
 
@@ -809,9 +813,12 @@ void RecordingWindow::UpdateTables()
                 counter++;
             }
         }
+//        m_count++;
+//        m_buffer.append(QPointF(m_count, counter));
 
         ui->tableWidgetFrequency->item(i, 2)->setText(QString::number(counter));
     }
+//    series->replace(m_buffer);
 
     for (int i=0; i<keySet.DurationKeys.count(); i++)
     {
